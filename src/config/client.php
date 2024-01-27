@@ -10,7 +10,7 @@
 
 return [
     // 是否启用内网穿透服务客户端
-    'enable'    => false,
+    'enable'    => env('NAT_CLIENT_ENABLE', false),
     // 进程配置
     'config'    => [
         // 进程数，客户端进程数必须为1
