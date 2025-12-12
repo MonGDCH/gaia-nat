@@ -5,14 +5,14 @@ return [
     // 是否为调试模式
     'debug'         => env('NAT_DEBUG', false),
     // 内网穿透服务鉴权token
-    'token'         => env('NAT_TOKEN', 'kjdsgk895uJDS@_+$12d-S#1!'),
+    'token'         => env('NAT_TOKEN', '%s'),
     // 服务端地址
     'channel_host'  => env('NAT_CHANNEL_HOST', 'nat.gdmon.com'),
-    // 服务端通信服务端口
+    // 服务端channel通信服务端口
     'channel_port'  => env('NAT_CHANNEL_PORT', 2209),
-    // 内网穿透地址
+    // 本地内网穿透地址
     'proxy_host'    => '127.0.0.1',
-    // 内网穿透端口，映射本地80端口，通过配置host和Nginx多域名，实现完全的内网透传
+    // 本地内网穿透端口，映射本地80端口，通过配置host和Nginx多域名，实现完全的内网透传
     'proxy_port'    => 80,
     // 事件标识名称
     'event'         => [
@@ -30,5 +30,13 @@ return [
         'out_net_msg'           => 'out_net_msg',
         // 外网链接断开标识
         'out_net_close'         => 'out_net_close'
+    ],
+    // 外网请求服务的配置
+    'net'    => [
+        // 监听协议端口，需要对外开放，外网访问对应的IP端口即可，tcp协议即支持http、https、tcp三种穿透方式
+        // 也可以监听本地IP，通过nginx代理，防止被外部访问
+        'listen'    => 'tcp://127.0.0.1:' . env('NAT_NET_PORT', 8001),
+        // 进程数，代理服务端一般单个进程即可
+        'count'     => env('NAT_NET_COUNT', 1),
     ]
 ];

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace process\nat;
+namespace support\nat\process;
 
 use Channel\Client;
 use mon\env\Config;
@@ -53,23 +53,13 @@ class NatServer implements ProcessInterface
     private $timerLimitGap = 10;
 
     /**
-     * 是否启用进程
-     *
-     * @return boolean
-     */
-    public static function enable(): bool
-    {
-        return Config::instance()->get('nat.server.enable', false);
-    }
-
-    /**
      * 获取进程配置
      *
      * @return array
      */
     public static function getProcessConfig(): array
     {
-        return Config::instance()->get('nat.server.net', []);
+        return Config::instance()->get('nat.app.net', []);
     }
 
     /**

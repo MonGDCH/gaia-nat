@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace process\nat;
+namespace support\nat\process;
 
 use Channel\Client;
 use mon\env\Config;
@@ -47,24 +47,16 @@ class NatClient implements ProcessInterface
     private $timerLimit = 5;
 
     /**
-     * 是否启用进程
-     *
-     * @return boolean
-     */
-    public static function enable(): bool
-    {
-        // return false;
-        return Config::instance()->get('nat.client.enable', false);
-    }
-
-    /**
      * 获取进程配置
      *
      * @return array
      */
     public static function getProcessConfig(): array
     {
-        return Config::instance()->get('nat.client.config', []);
+        return [
+            // 进程数，客户端进程数必须为1
+            'count' => 1,
+        ];
     }
 
     /**
@@ -189,9 +181,7 @@ class NatClient implements ProcessInterface
      * @param mixed $data
      * @return void
      */
-    public function onMessage(TcpConnection $connection, $data)
-    {
-    }
+    public function onMessage(TcpConnection $connection, $data) {}
 
     /**
      * 外网链接断开
@@ -199,9 +189,7 @@ class NatClient implements ProcessInterface
      * @param TcpConnection $connection
      * @return void
      */
-    public function onClose(TcpConnection $connection)
-    {
-    }
+    public function onClose(TcpConnection $connection) {}
 
     /**
      * 加密处理事件名，防止错误的监听

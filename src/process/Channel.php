@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace process\nat;
+namespace support\nat\process;
 
 use mon\env\Config;
 use Channel\Server;
@@ -22,31 +22,24 @@ class Channel extends Server implements ProcessInterface
     use ProcessTrait;
 
     /**
-     * 是否启用进程
-     *
-     * @return boolean
-     */
-    public static function enable(): bool
-    {
-        return Config::instance()->get('nat.server.enable', false);
-    }
-
-    /**
      * 获取进程配置
      *
      * @return array
      */
     public static function getProcessConfig(): array
     {
-        return Config::instance()->get('nat.server.channel', []);
+        return [
+            // 监听协议端口，需要对外开放，客户端链接管道通信
+            'listen'    => 'frame://0.0.0.0:' . Config::instance()->get('nat.app.channel_port', 2209),
+            // 进程数，必须是1
+            'count'     => 1,
+        ];
     }
 
     /**
      * 重载构造方法
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * 进程启动
