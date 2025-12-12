@@ -30,7 +30,7 @@ class Channel extends Server implements ProcessInterface
     {
         return [
             // 监听协议端口，需要对外开放，客户端链接管道通信
-            'listen'    => 'frame://0.0.0.0:' . Config::instance()->get('nat.app.channel_port', 2209),
+            'listen'    => 'frame://0.0.0.0:' . Config::instance()->get('nat.channel_port', 2209),
             // 进程数，必须是1
             'count'     => 1,
         ];

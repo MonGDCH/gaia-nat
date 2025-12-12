@@ -65,7 +65,7 @@ class NatClient implements ProcessInterface
     public function __construct()
     {
         // 加载配置
-        $this->config = array_merge($this->config, Config::instance()->get('nat.app', []));
+        $this->config = array_merge($this->config, Config::instance()->get('nat', []));
     }
 
     /**

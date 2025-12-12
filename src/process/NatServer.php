@@ -59,7 +59,7 @@ class NatServer implements ProcessInterface
      */
     public static function getProcessConfig(): array
     {
-        return Config::instance()->get('nat.app.net', []);
+        return Config::instance()->get('nat.server', []);
     }
 
     /**
@@ -68,7 +68,7 @@ class NatServer implements ProcessInterface
     public function __construct()
     {
         // 加载配置
-        $this->config = array_merge($this->config, Config::instance()->get('nat.app', []));
+        $this->config = array_merge($this->config, Config::instance()->get('nat', []));
     }
 
     /**

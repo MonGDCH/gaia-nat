@@ -31,8 +31,8 @@ return [
         // 外网链接断开标识
         'out_net_close'         => 'out_net_close'
     ],
-    // 外网请求服务的配置
-    'net'    => [
+    // 服务器穿透服务配置
+    'server'    => [
         // 监听协议端口，需要对外开放，外网访问对应的IP端口即可，tcp协议即支持http、https、tcp三种穿透方式
         // 也可以监听本地IP，通过nginx代理，防止被外部访问
         'listen'    => 'tcp://127.0.0.1:' . env('NAT_NET_PORT', 8001),
